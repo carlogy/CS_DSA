@@ -1,4 +1,6 @@
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Microsoft.VisualBasic;
 
 namespace CS_DSA.Introduction;
 
@@ -91,7 +93,6 @@ public static class IntroMethods
             Console.WriteLine("🎉 All Tests Passed!");
         }
     }
-
     public static bool isPrime(int n)
     {
         if (n == 0 || n == 1)
@@ -172,7 +173,6 @@ public static class IntroMethods
         }
         return results;
     }
-
     public static void TestFizzBuzz()
     {
         var testsPassed = true;
@@ -199,5 +199,44 @@ public static class IntroMethods
             Console.WriteLine("🎉 All Tests Passed!");
         }
     }
-}
+    public static string[][] Pairs(string[] nums)
+    {
+        var pairList = new List<string[]>();
 
+        for (var i = 0; i < nums.Length; i++)
+        {
+            for (int j = i + 1; j < nums.Length; j++)
+            {
+                pairList.Add(new string[] { nums[i], nums[j] });
+            }
+        }
+        return pairList.ToArray();
+    }
+
+    public static void  TestPairs()
+    {
+        var testsPassed = true;
+        var testCases = new Dictionary<string[], string[][]>();
+
+        testCases.Add(new string[] { "a", "b", "c" }, new string[][] { new string[] { "a", "b" }, new string[] { "a", "c" }, new string[] { "b", "c" } });
+        testCases.Add(new string[] { "a", "b", "c", "d" }, new string[][] { new string[] { "a", "b" }, new string[] { "a", "c" }, new string[] { "a", "d" }, new string[] { "b", "c" }, new string[] { "b", "d" }, new string[] { "c", "d" } });
+        testCases.Add(new string[] { "cherry", "cranberry", "banana", "blueberry", "lime", "papaya" }, new string[][] { new string[] { "cherry", "cranberry" }, new string[] { "cherry", "banana" }, new string[] { "cherry", "blueberry" }, new string[] { "cherry", "lime" }, new string[] { "cherry", "papaya" }, new string[] { "cranberry", "banana" }, new string[] { "cranberry", "blueberry" }, new string[] { "cranberry", "lime" }, new string[] { "cranberry", "papaya" }, new string[] { "banana", "blueberry" }, new string[] { "banana", "lime" }, new string[] { "banana", "papaya" }, new string[] { "blueberry", "lime" }, new string[] { "blueberry", "papaya" }, new string[] { "lime", "papaya" } });
+
+        foreach (var test in testCases)
+        {
+            var actual = Pairs(test.Key);
+
+            Console.Write($"String Array:\t{String.Join(", ", test.Key)}\t");
+            if (test.Value.Equals(actual))
+            {
+                testsPassed = false;
+                Console.Write($"Got:\t{actual}\t Test Failed ❌\n");
+            }
+            else { Console.Write("Test Passed ✅\n"); }
+        }
+        if (testsPassed)
+        {
+            Console.WriteLine("🎉 All Tests Passed!");
+        }
+    }
+}
