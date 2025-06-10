@@ -1,4 +1,5 @@
 namespace CS_DSA.Hashing;
+
 public static class HashTests
 {
     public static void TestAnagrams()
@@ -31,6 +32,35 @@ public static class HashTests
             }
             else { Console.Write("Test Passed ✅\n"); }
 
+        }
+        if (testsPassed)
+        {
+            Console.WriteLine("🎉 All Tests Passed!");
+        }
+    }
+
+    public static void TestMostFrequentChar()
+    {
+        var testsPassed = true;
+        var testCases = new Dictionary<string, char>();
+        testCases.Add("bookeeper", 'e');
+        testCases.Add("david", 'd');
+        testCases.Add("abby", 'b');
+        testCases.Add("mississippi", 'i');
+        testCases.Add("potato", 'o');
+        testCases.Add("eleventennine", 'e');
+        testCases.Add("riverbed", 'r');
+
+        foreach (var test in testCases)
+        {
+            Console.Write($"For:\t{test.Key}\tExpecting: {test.Value}\t");
+            var actual = HashingExercises.MostFrequentChar(test.Key);
+            if (actual != test.Value)
+            {
+                testsPassed = false;
+                Console.Write($"Got:\t{actual}\t Test Failed ❌\n");
+            }
+            else { Console.Write("Test Passed ✅\n"); }
         }
         if (testsPassed)
         {
