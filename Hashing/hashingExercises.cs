@@ -1,4 +1,5 @@
 namespace CS_DSA.Hashing;
+
 class HashingExercises
 {
     public static bool Anagrams(string s1, string s2)
@@ -70,6 +71,26 @@ class HashingExercises
                 continue;
             }
             return [count[complement], i];
+        }
+        return [];
+    }
+    public static int[] PairProduct(int[] nums, int target)
+    {
+        var previous = new Dictionary<int, int>();
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            var complement = target / nums[i];
+
+            if (!previous.ContainsKey(complement))
+            {
+                previous[nums[i]] = i;
+                continue;
+            }
+            else
+            {
+                return [previous[complement], i];
+            }
         }
         return [];
     }
