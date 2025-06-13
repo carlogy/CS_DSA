@@ -94,4 +94,19 @@ class HashingExercises
         }
         return [];
     }
+
+    public static int[] Intersection(int[] a, int[] b)
+    {
+        var setB = b.ToHashSet();
+        var diffs = new List<int>();
+
+        foreach (var num in a)
+        {
+            if (setB.Contains(num))
+            {
+                diffs.Add(num);
+            }
+        }
+        return diffs.ToArray();
+    }
 }
