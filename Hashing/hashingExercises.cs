@@ -109,4 +109,30 @@ class HashingExercises
         }
         return diffs.ToArray();
     }
+
+    public static int[] ExclusiveItems(int[] a, int[] b)
+    {
+
+        var diffs = new List<int>();
+        var setA = a.ToHashSet();
+        var setB = b.ToHashSet();
+
+        foreach (var item in setA)
+        {
+            if (!setB.Contains(item))
+            {
+                diffs.Add(item);
+            }
+        }
+
+        foreach (var item in setB)
+        {
+            if (!setA.Contains(item))
+            {
+                diffs.Add(item);
+            }
+        }
+
+        return diffs.ToArray();
+    }
 }

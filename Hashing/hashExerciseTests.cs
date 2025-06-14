@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Net.Http.Headers;
+using Xunit.Sdk;
 
 namespace CS_DSA.Hashing;
 
@@ -185,6 +186,38 @@ public static class HashTests
         {
             Console.WriteLine("🎉 All Tests Passed!");
         }
+    }
+
+    public static void TestExclusiveItems()
+    {
+        var testsPassed = true;
+        var testCases = new Dictionary<Tuple<int[], int[]>, int[]>();
+        testCases.Add(Tuple.Create(new int[] { 4, 2, 1, 6 }, new int[] { 3, 6, 9, 2, 10 }), new int[] { 4, 1, 3, 9, 10 });
+        testCases.Add(Tuple.Create(new int[] { 2, 4, 6 }, new int[] { 4, 2 }), new int[] { 6 });
+        testCases.Add(Tuple.Create(new int[] { 4, 2, 1 }, new int[] { 1, 2, 4, 6 }), new int[] { 6 });
+        testCases.Add(Tuple.Create(new int[] { 0, 1, 2 }, new int[] { 10, 11 }), new int[] { 0, 1, 2, 10, 11 });
+
+        foreach (var test in testCases)
+        {
+            var (a, b) = test.Key;
+
+            Console.Write($"For:\t{(a.Length < 10 ? String.Join(",", a) : a.Length)}\t{(b.Length < 10 ? String.Join(",", b) : b.Length)}\tExpecting: {(test.Value.Length < 10 ? String.Join(",", test.Value) : test.Value.Length)}\t");
+
+            var actual = HashingExercises.ExclusiveItems(a, b);
+
+            if (!ArrayCompare<int>(actual, test.Value))
+            // if (!actual.SequenceEqual(test.Value))
+            {
+                testsPassed = false;
+                Console.Write($"Got:\t{(actual.Length < 10 ? String.Join(",", actual) : actual.Length)}\t Test Failed ❌\n");
+            }
+            else { Console.Write("Test Passed ✅\n"); }
+        }
+        if (testsPassed)
+        {
+            Console.WriteLine("🎉 All Tests Passed!");
+        }
+
     }
 
     public static bool ArrayCompare<T>(T[] a, T[] b)
