@@ -57,7 +57,6 @@ public class HashingExercises
         }
         return max.Item1;
     }
-
     public static int[] PairSum(int[] nums, int target)
     {
         var count = new Dictionary<int, int>();
@@ -94,7 +93,6 @@ public class HashingExercises
         }
         return [];
     }
-
     public static int[] Intersection(int[] a, int[] b)
     {
         var setB = b.ToHashSet();
@@ -109,7 +107,6 @@ public class HashingExercises
         }
         return diffs.ToArray();
     }
-
     public static int[] ExclusiveItems(int[] a, int[] b)
     {
 
@@ -134,5 +131,10 @@ public class HashingExercises
         }
 
         return diffs.ToArray();
+    }
+    public static bool AllUnique(string[] s)
+    {
+        var hashS = s.ToHashSet();
+        return s.Length == hashS.Count;
     }
 }
